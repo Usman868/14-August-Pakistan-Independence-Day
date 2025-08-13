@@ -1,0 +1,166 @@
+  :root{
+    --bg: #0b1f16;
+    --card: #0f2b1f;
+    --ink: #e7f6ee;
+    --muted: #bfe6d2;
+    --accent: #19a463;
+    --accent-2:#2bd58d;
+    --shadow: 0 10px 30px rgba(0,0,0,.25);
+    --radius: 20px;
+    --maxw: 1100px;
+    --g: clamp(16px, 2vw, 24px);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ height:100%; background: radial-gradient(1200px 600px at 80% -10%, rgba(43,213,141,.25), transparent), var(--bg); color: var(--ink); }
+  body{ margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; }
+
+  /* Language toggle (CSS-only) */
+  #langToggle{ position: absolute; left:-9999px; }
+  .toolbar{
+    position: sticky; top:0; z-index:20;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(to bottom, rgba(11,31,22,.8), rgba(11,31,22,.5));
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .toolbar-inner{
+    max-width: var(--maxw); margin: 0 auto; padding: 10px clamp(16px, 4vw, 28px);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .brand{ font-weight: 800; letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
+  .brand .flag{ width:26px; height:18px; border-radius:3px; box-shadow: var(--shadow); background: url('https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg') center/cover no-repeat; }
+
+  .toggle{
+    display:inline-flex; align-items:center; gap:10px;
+    border:1px solid rgba(255,255,255,.12);
+    padding: 6px 10px; border-radius: 999px;
+    cursor: pointer; user-select:none;
+    transition: transform .2s ease, border-color .3s ease, background .3s ease;
+  }
+  .toggle:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.04); }
+  .chip{
+    font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+    opacity:.6; transition: all .3s ease; white-space: nowrap;
+  }
+  /* When checked => Urdu active */
+  #langToggle:checked ~ .site .chip.en { opacity:.5; }
+  #langToggle:checked ~ .site .chip.ur { opacity:1; background: rgba(25,164,99,.25); }
+  #langToggle:not(:checked) ~ .site .chip.en { opacity:1; background: rgba(25,164,99,.25); }
+  #langToggle:not(:checked) ~ .site .chip.ur { opacity:.5; }
+
+  /* i18n visibility */
+  .i18n .ur, .i18n-block .ur { display:none; }
+  #langToggle:checked ~ .site .i18n .en,
+  #langToggle:checked ~ .site .i18n-block .en { display:none; }
+  #langToggle:checked ~ .site .i18n .ur,
+  #langToggle:checked ~ .site .i18n-block .ur { display:inline; }
+  #langToggle:checked ~ .site .i18n-block .ur { display:block; }
+
+  /* Direction + font swap for Urdu */
+  #langToggle:checked ~ .site{ direction: rtl; font-family: "Noto Nastaliq Urdu", serif; }
+  #langToggle:checked ~ .site h1,
+  #langToggle:checked ~ .site h2,
+  #langToggle:checked ~ .site h3{ font-family: "Noto Nastaliq Urdu", serif; }
+  .site{ direction: ltr; }
+
+  /* Hero */
+  .hero{
+    position: relative; overflow:hidden; border-radius: 0 0 28px 28px;
+    background:
+      linear-gradient(to bottom, rgba(11,31,22,.1), rgba(11,31,22,.6)),
+      url('https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg') center/cover no-repeat;
+  }
+  .hero-inner{
+    max-width: var(--maxw); margin: 0 auto; min-height: 65vh;
+    padding: clamp(48px, 8vw, 100px) clamp(16px, 4vw, 28px);
+    display:grid; align-items:center; grid-template-columns:1.1fr;
+  }
+
+  .kicker{ color: var(--muted); font-weight:600; letter-spacing:.2em; text-transform:uppercase; font-size:12px; opacity:.9; }
+  .title{
+    font-weight: 800; line-height:1.1; margin: 10px 0 16px; font-size: clamp(28px, 6vw, 56px);
+  }
+
+  /* Animated type effect (CSS-only) */
+  .type{
+    position: relative; display:inline-block; white-space: nowrap; overflow: hidden;
+    border-right: 2px solid var(--accent-2);
+    animation: typing 4.5s steps(28, end) 1 both, caret 700ms step-end infinite;
+    will-change: width;
+  }
+  @keyframes typing { from{ width: 0 } to { width: 100% } }
+  @keyframes caret { 50% { border-color: transparent; } }
+
+  .lead{ max-width: 60ch; color: var(--muted); margin-bottom: 26px; }
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .btn{
+    display:inline-block; padding: 12px 18px; border-radius: 999px; font-weight:700; text-decoration:none; color:#062b1a;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: var(--shadow); transition: transform .25s ease, filter .25s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); filter: brightness(1.05); }
+
+  /* Sections */
+  section{ max-width: var(--maxw); margin: 0 auto; padding: clamp(28px,6vw,72px) clamp(16px, 4vw, 28px); }
+  .section-title{ font-size: clamp(22px, 3.6vw, 34px); margin: 0 0 10px; }
+  .section-lead{ color: var(--muted); margin:0 0 26px; }
+
+  /* Cards grid */
+  .grid{ display:grid; gap: var(--g); }
+  .grid.cols-2{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .grid.cols-3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+  @media (max-width: 900px){
+    .grid.cols-3{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  }
+  @media (max-width: 640px){
+    .grid.cols-2, .grid.cols-3{ grid-template-columns: 1fr; }
+  }
+
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    overflow: hidden; box-shadow: var(--shadow);
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease, background .3s ease;
+    animation: fadeUp .8s ease both;
+  }
+  .card:hover{ transform: translateY(-6px); border-color: rgba(255,255,255,.18); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+  @keyframes fadeUp{ from{opacity:0; transform: translateY(12px)} to{opacity:1; transform:none} }
+
+  .media{ aspect-ratio: 16/10; width:100%; object-fit: cover; display:block; }
+  .pad{ padding: 16px; }
+  .card h3{ margin: 8px 0 6px; font-size: 20px; }
+  .muted{ color: var(--muted); }
+
+  /* Side-by layout for History + Operation */
+  .split{
+    display:grid; grid-template-columns: 1.2fr .9fr; gap: var(--g); align-items:center;
+  }
+  @media (max-width: 860px){ .split{ grid-template-columns: 1fr; } }
+
+  .pill{
+    display:inline-block; font-size: 12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:#062b1a; background: rgba(43,213,141,.9); padding:6px 10px; border-radius: 999px;
+  }
+
+  /* Footer */
+  footer{
+    border-top: 1px solid rgba(255,255,255,.08);
+    background: linear-gradient(to top, rgba(0,0,0,.25), transparent);
+  }
+  .foot{
+    max-width: var(--maxw); margin:0 auto; padding: 22px clamp(16px, 4vw, 28px);
+    display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  }
+  .social{ display:flex; gap:12px; flex-wrap:wrap; }
+  .social a{
+    display:inline-block; padding:8px 12px; border-radius: 10px; text-decoration:none; color: var(--ink);
+    border:1px solid rgba(255,255,255,.12); transition: transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .social a:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.05); }
+
+  /* Make images graceful on RTL */
+  #langToggle:checked ~ .site .media{ transform-origin: center; }
+
+  /* Small helper for Urdu text sizing in tight spaces */
+  .ur.tight{ font-size: 90%; line-height:1.9; }
